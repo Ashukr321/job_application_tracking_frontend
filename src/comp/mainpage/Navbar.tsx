@@ -165,12 +165,35 @@ const Navbar = () => {
                   </a>
                 ))}
                 
-                {/* Mobile Login/Signup Button */}
-                <Button variant="outline" size="sm" className="relative group overflow-hidden w-full">
+                {/* Mobile Login Button */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="relative group overflow-hidden w-full"
+                  onClick={() => {
+                    navigate('/login')
+                  }}
+                >
                   <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-blue-500 to-teal-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                   <span className="flex items-center gap-2 justify-center">
                     <LogIn className="h-4 w-4 text-violet-500 dark:text-violet-400" />
-                    <span>Login / Signup</span>
+                    <span>Login</span>
+                  </span>
+                </Button>
+
+                {/* Mobile Register Button */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="relative group overflow-hidden w-full"
+                  onClick={() => {
+                    navigate('/register')
+                  }}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-blue-500 to-teal-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                  <span className="flex items-center gap-2 justify-center">
+                    <User2 className="h-4 w-4 text-blue-500 dark:text-blue-400" />
+                    <span>Register</span>
                   </span>
                 </Button>
               </div>
