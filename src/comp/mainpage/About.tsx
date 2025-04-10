@@ -1,4 +1,3 @@
-import React from 'react'
 import { Briefcase, Target, Clock, Users, CheckCircle, TrendingUp } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
