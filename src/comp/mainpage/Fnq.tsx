@@ -11,6 +11,7 @@ import {
   Bell,
   HelpCircle
 } from "lucide-react"
+import { motion } from "framer-motion"
 
 const Fnq = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -173,55 +174,76 @@ const Fnq = () => {
   })).filter(section => section.questions.length > 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] to-white dark:from-gray-950 dark:to-gray-900" id="fnq">
-      {/* Background pattern */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#00A19B05_1px,transparent_1px),linear-gradient(to_bottom,#00A19B05_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <section className="relative min-h-screen pt-24 md:pt-28 pb-12 md:pb-16 bg-background overflow-hidden" id="fnq">
+      {/* Gradient Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 -left-1/4 w-3/4 h-1/2 bg-gradient-to-br from-violet-500/5 via-transparent to-transparent dark:from-violet-500/10 transform rotate-12"></div>
+        <div className="absolute -bottom-1/2 right-0 w-3/4 h-full bg-gradient-to-tl from-teal-500/5 via-transparent to-transparent dark:from-teal-500/10 transform -rotate-12"></div>
+        <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-gradient-to-r from-blue-500/5 via-transparent to-transparent dark:from-blue-500/10 blur-3xl"></div>
+      </div>
 
-      <div className="container mx-auto px-4 py-24">
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center rounded-full border border-primary/20 px-4 py-1.5 text-sm font-medium bg-primary/5 mb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-12 md:mb-20"
+        >
+          <div className="inline-flex items-center rounded-full border border-primary/20 px-4 py-1.5 text-sm font-medium bg-primary/5 backdrop-blur-sm mb-6">
             <span className="text-primary">Help Center</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-            Frequently Asked
-            <span className="text-primary"> Questions</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 md:mb-6 bg-gradient-to-r from-violet-500 via-blue-500 to-teal-500 bg-clip-text text-transparent">
+            Frequently Asked Questions
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             Find answers to common questions about using our student career tracking platform
           </p>
-        </div>
+        </motion.div>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-2xl mx-auto mb-8 md:mb-12"
+        >
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search your question..."
-              className="pl-10"
+              className="pl-10 bg-card/80 backdrop-blur-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* FAQ Sections */}
-        <div className="max-w-3xl mx-auto space-y-6">
-          {filteredSections.map((section) => (
-            <div
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="max-w-3xl mx-auto space-y-4 md:space-y-6"
+        >
+          {filteredSections.map((section, index) => (
+            <motion.div
               key={section.id}
-              className="rounded-xl border border-primary/10 bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="rounded-xl border border-primary/10 bg-card/80 dark:bg-gray-900/50 backdrop-blur-sm overflow-hidden hover:border-primary/20 transition-colors"
             >
               {/* Section Header */}
               <button
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors"
+                className="w-full px-4 sm:px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors"
                 onClick={() => toggleSection(section.id)}
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <section.icon className="h-5 w-5 text-primary" />
+                  <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <section.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                   </div>
-                  <h2 className="text-xl font-semibold">{section.title}</h2>
+                  <h2 className="text-lg sm:text-xl font-semibold">{section.title}</h2>
                 </div>
                 <ChevronDown
                   className={`h-5 w-5 text-primary transition-transform ${
@@ -232,7 +254,7 @@ const Fnq = () => {
 
               {/* Questions */}
               {openSection === section.id && (
-                <div className="px-6 pb-4">
+                <div className="px-4 sm:px-6 pb-4">
                   <div className="space-y-3">
                     {section.questions.map((q) => (
                       <div
@@ -240,19 +262,19 @@ const Fnq = () => {
                         className="rounded-lg border border-primary/10 overflow-hidden"
                       >
                         <button
-                          className="w-full px-4 py-3 flex items-center justify-between hover:bg-primary/5 transition-colors"
+                          className="w-full px-4 py-3 flex items-center justify-between hover:bg-primary/5 transition-colors text-left"
                           onClick={() => toggleQuestion(q.id)}
                         >
-                          <span className="font-medium text-left">{q.question}</span>
+                          <span className="text-sm sm:text-base font-medium pr-4">{q.question}</span>
                           <ChevronDown
-                            className={`h-4 w-4 text-primary transition-transform ${
+                            className={`h-4 w-4 flex-shrink-0 text-primary transition-transform ${
                               openQuestions.includes(q.id) ? "rotate-180" : ""
                             }`}
                           />
                         </button>
                         {openQuestions.includes(q.id) && (
                           <div className="px-4 py-3 bg-primary/5 dark:bg-primary/10">
-                            <p className="text-muted-foreground">{q.answer}</p>
+                            <p className="text-sm sm:text-base text-muted-foreground">{q.answer}</p>
                           </div>
                         )}
                       </div>
@@ -260,17 +282,22 @@ const Fnq = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Still Need Help */}
-        <div className="mt-20 text-center">
+        {/* Still Need Help Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 md:mt-20 text-center"
+        >
           <div className="inline-flex items-center gap-2 mb-4">
             <HelpCircle className="h-5 w-5 text-primary" />
             <span className="font-medium">Still need help?</span>
           </div>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               variant="outline"
               className="border-primary/20 hover:border-primary/40"
@@ -278,14 +305,14 @@ const Fnq = () => {
               Contact Support
             </Button>
             <Button
-              className="bg-primary hover:bg-primary/90"
+              className="bg-gradient-to-r from-violet-500 via-blue-500 to-teal-500 text-white hover:opacity-90"
             >
               Live Chat
             </Button>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   )
 }
 
